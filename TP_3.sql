@@ -1,9 +1,9 @@
 CREATE TABLE Customer
 (
  cno NUMBER(3) NOT NULL, 
- name VARCHAR2(10),
- passwd VARCHAR2(12),
- email VARCHAR2(20),
+ name VARCHAR2(20),
+ passwd VARCHAR2(20),
+ email VARCHAR2(30),
  CONSTRAINT Customer_PK PRIMARY KEY (cno),
  CONSTRAINT Customer_UQ UNIQUE (email),
  CONSTRAINT CHK_cno CHECK (cno>=0)
@@ -14,7 +14,7 @@ CREATE TABLE Ebook
 (
  isbn NUMBER(5) NOT NULL,
  title VARCHAR2(100),
- publisher VARCHAR2(14),
+ publisher VARCHAR2(30),
  year DATE,
  cno NUMBER(3),
  extTimes NUMBER(1) CHECK (extTimes>=0 AND extTimes<=2),
@@ -62,7 +62,7 @@ describe Authors;
 
 
 
- /*µµ¼­ ¿¹¾à Á¤º¸(ReservationInfo)¶ó´Â View¸¦ Á¤ÀÇÇØ º¸¾Æ¶ó. View°¡ °¡Á®¾ß ÇÒ Á¤º¸´Â ¿¹¾à µµ¼­ÀÇ isbn, title ¹× ¿¹¾à °í°´ÀÇ cno, name, email°ú ¿¹¾à½Ã°£(reservationTime)ÀÌ´Ù.*/
+ /*ë„ì„œ ì˜ˆì•½ ì •ë³´(ReservationInfo)ë¼ëŠ” Viewë¥¼ ì •ì˜í•´ ë³´ì•„ë¼. Viewê°€ ê°€ì ¸ì•¼ í•  ì •ë³´ëŠ” ì˜ˆì•½ ë„ì„œì˜ isbn, title ë° ì˜ˆì•½ ê³ ê°ì˜ cno, name, emailê³¼ ì˜ˆì•½ì‹œê°„(reservationTime)ì´ë‹¤.*/
 CREATE VIEW ReservationInfo AS
  SELECT E.isbn, E.title, R.reservationTime, C.cno, C.name, C.email FROM Reservation R, Customer C, Ebook E
  WHERE R.cno = C.cno and E.isbn = R.isbn;
